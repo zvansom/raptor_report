@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/login', (req, res) => {
-  res.send('stubbed auth login form page');
+  res.render('auth/login');
 });
 
 router.post('/login', (req, res) => {
@@ -11,7 +11,7 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-  res.send('stubbed auth signup form page');
+  res.render('auth/signup');
 });
 
 router.post('/signup', (req, res) => {
@@ -19,7 +19,7 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  res.send('logout');
+  res.render('auth/logout');
 });
 
 
