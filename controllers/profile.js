@@ -2,7 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+const loggedIn = require('../middleware/loggedIn');
+
+router.get('/', loggedIn, (req, res) => {
   res.render('profile/index');
 });
 

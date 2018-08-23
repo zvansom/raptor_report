@@ -20,7 +20,7 @@ passport.use( new passportLocalStrategy({
   db.user.findOne({ where: { email } })
   .then( foundUser => {
     if(!foundUser || !foundUser.isValidPassword(password)) {
-      callback('Invalid User', null);
+      callback(null, null);
     } else {
       callback(null, foundUser);
     }
