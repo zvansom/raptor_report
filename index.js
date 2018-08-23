@@ -10,6 +10,9 @@ app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/auth', require('./controllers/auth'));
+app.use('/profile', require('./controllers/profile'));
+
 app.get('/', (req, res) => {
   res.render('home');
 });
