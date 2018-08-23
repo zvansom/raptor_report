@@ -37,16 +37,19 @@ router.post('/signup', (req, res) => {
       })(req, res);
     } else { // User already exists
       // TODO: Send an error message.
+      req.flash('error', 'Email already in use.  Please login');
       res.redirect('/auth/login');
     }
   }).catch( err => {
-    console.log(err);
-    res.send(err);
+    req.flash('error', err.message);
+    res.redirect('/auth/signup');
   })
 });
 
 router.get('/logout', (req, res) => {
-  res.render('auth/logout');
+  req.logout(); // Logs out of session
+  req.flash('success', 'Successfully logged out!');
+  res.redirect('/');
 });
 
 
