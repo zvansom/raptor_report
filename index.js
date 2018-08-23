@@ -1,7 +1,8 @@
 const bodyParser = require('body-parser');
 const ejsLayouts = require('express-ejs-layouts');
 const express = require('express');
-const passport = require('passport');
+const flash = require('connect-flash');
+const passport = require('./config/passportConfig');
 const session = require('express-session');
 
 const app = express();
@@ -9,6 +10,14 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+  secret: 'abc',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/auth', require('./controllers/auth'));
 app.use('/profile', require('./controllers/profile'));

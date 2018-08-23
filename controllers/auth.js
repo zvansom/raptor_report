@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('../config/passportConfig');
 
 const db = require('../models');
 
@@ -8,9 +9,12 @@ router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
-router.post('/login', (req, res) => {
-  res.send('stubbed auth login post route');
-});
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/profile',
+  successFlash: 'Successfully logged in.',
+  failureRedirect: '/auth/login',
+  failureFlash: 'Invalid Credentials'
+}));
 
 router.get('/signup', (req, res) => {
   res.render('auth/signup');
@@ -25,7 +29,12 @@ router.post('/signup', (req, res) => {
   .spread( (user, wasCreated) => {
     if (wasCreated) { // Expected behavior
       // Log the user in
-      res.redirect('/profile');
+      passport.authenticate('local', {
+        successRedirect: '/profile',
+        successFlash: 'Successfully logged in.',
+        failureRedirect: '/',
+        failureFlash: 'Authenticate failed.'
+      })(req, res);
     } else { // User already exists
       // TODO: Send an error message.
       res.redirect('/auth/login');
