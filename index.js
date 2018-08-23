@@ -11,7 +11,7 @@ app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-
+  res.render('home');
 });
 
 app.listen(3000, () => {
