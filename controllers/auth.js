@@ -36,7 +36,6 @@ router.post('/signup', (req, res) => {
         failureFlash: 'Authenticate failed.'
       })(req, res);
     } else { // User already exists
-      // TODO: Send an error message.
       req.flash('error', 'Email already in use.  Please login');
       res.redirect('/auth/login');
     }
