@@ -32,6 +32,7 @@ app.use(function(req, res, next) {
 });
 
 app.use("/auth", require("./controllers/auth"));
+app.use('/birds', require('./controllers/birds'));
 app.use("/profile", require("./controllers/profile"));
 
 app.get("/", (req, res) => {
